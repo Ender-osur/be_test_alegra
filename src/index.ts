@@ -1,18 +1,32 @@
 import express from 'express';
 import cors from 'cors';
 import { setupProxy } from './proxy';
+import 'dotenv/config';
+
+console.log("TEST DOTENV: ", process.env.TOKEN_ALEGRA_BASE64);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(cors()); // Habilita CORS para el frontend
-app.use(express.json()); // Permite recibir JSON en las solicitudes
+const allowedOrigins = [
+  'https://testalegra-production.up.railway.app', 
+  'http://localhost:3000',
+];
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); 
+    } else {
+      callback(new Error('Acceso no permitido por CORS')); 
+    }
+  },
+  credentials: true,
+}));
 
-// Configura el proxy
+app.use(express.json());
+
 setupProxy(app);
 
-// Inicia el servidor
 app.listen(PORT, () => {
   console.log(`Proxy server running on http://localhost:${PORT}`);
 });
