@@ -5,7 +5,6 @@ import 'dotenv/config'
 const ALEGRA_API_URL = process.env.ALEGRA_API_URL;
 const TOKEN_ALEGRA_BASE64 = process.env.TOKEN_ALEGRA_BASE64;
 
-console.log("ALEGRA: ", ALEGRA_API_URL);
 
 export function setupProxy(app: Express) {
   app.all("/api/alegra/*", async (req: Request, res: Response) => {

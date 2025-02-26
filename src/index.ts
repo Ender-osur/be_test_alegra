@@ -3,8 +3,6 @@ import cors from 'cors';
 import { setupProxy } from './proxy';
 import 'dotenv/config';
 
-console.log("TEST DOTENV: ", process.env.TOKEN_ALEGRA_BASE64);
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
