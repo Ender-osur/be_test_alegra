@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 const allowedOrigins = [
   'https://testalegra-production.up.railway.app', 
   'http://localhost:3000',
+  'http://localhost:5173',
 ];
 app.use(cors({
   origin: (origin, callback) => {
